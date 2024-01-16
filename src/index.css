@@ -1,13 +1,81 @@
 body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
+
+.login-container,
+.tenant-container {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.loginText {
+  color: #333;
+}
+
+.error-message {
+  color: red;
+}
+
+form {
+  margin-top: 20px;
+}
+.tenant-form{
+  margin:5px;
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+h2 {
+  color: #333;
+}
+
+span {
+  color: blue;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.home-container {
+  margin: 0 auto;
+  margin-left: 2rem;
+  margin-top: 3rem;
+}
+

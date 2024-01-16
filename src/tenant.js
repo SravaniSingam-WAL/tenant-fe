@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getToken } from "./utils";
 
 const Tenant = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Tenant = () => {
     console.log("brandName:", brandName);
     console.log("Password:", password);
     console.log("Email:", email);
-
+    const token = getToken()
     const result = await axios.post(
       "http://localhost:3030/api/tenant",
       {
@@ -30,9 +31,9 @@ const Tenant = () => {
         options,
       },
       {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      headers: {
+        Authorization: token,
+      },
       }
     );
     if (result) {
@@ -47,10 +48,10 @@ const Tenant = () => {
     }));
   };
   return (
-    <div>
+    <div className="tenant-container">
       <h2>Tenant Page</h2>
       <h4>Create new Tenant</h4>
-      <form onSubmit={handleClick}>
+      <form className="tenant-form" onSubmit={handleClick}>
         <label>
           Email:
           <input
