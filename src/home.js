@@ -52,7 +52,7 @@ const Home = () => {
       <h2>Tenant List</h2><ul>
           {tenantDetails.map((tenant, index) => (
             <li key={index}>
-              <strong>Brand Name:</strong> {tenant.brandName}, <strong>Email:</strong> {tenant.email}
+              <strong>Email:</strong> {tenant.userName}
             </li>
           ))}
         </ul>
