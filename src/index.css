@@ -20,7 +20,10 @@ body {
 }
 
 .loginText {
+  text-align: center;
   color: #333;
+  margin-top: 11rem;
+
 }
 
 .error-message {
