@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getBrandName, getToken } from "./utils";
+import { PORT } from "./config";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Home = () => {
     console.log('Clicked on View Tenant')
     const token=getToken()
     const result = await axios.get(
-      "http://localhost:3030/api/tenants",
+      `${PORT}/api/tenants`,
       {
         headers: {
           Authorization: token

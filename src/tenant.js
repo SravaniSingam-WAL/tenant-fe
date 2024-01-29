@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "./utils";
+import { PORT } from "./config";
 
 const Tenant = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Tenant = () => {
     console.log("Email:", email);
     const token = getToken()
     const result = await axios.post(
-      "http://localhost:3030/api/tenant",
+      `${PORT}/api/tenant`,
       {
         email,
         brandName,
