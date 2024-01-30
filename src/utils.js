@@ -7,6 +7,11 @@ export const getEmail = () => {
     return email || '';
 };
 
+export const getRoleId = () => {
+    const { roleId } =  JSON.parse(localStorage.getItem('user') || '{}');
+    return roleId || '';
+};
+
 export const getTenantId = () => {
     const { tenantId } =  JSON.parse(localStorage.getItem('user') || '{}');
     return tenantId || '';
@@ -20,4 +25,17 @@ export const getBrandName = () => {
 export const setToken = (userDetails) => {
     localStorage.setItem('user', JSON.stringify(userDetails));   
 };
-    
+export const transformOptionsArrayToObject = (optionsArray) => {
+    const transformedOptions = {};
+  
+    for (const item of optionsArray) {
+      const { isAccess, application } = item;
+  
+      if (application && application.name) {
+        transformedOptions[application.name.toUpperCase()] = isAccess;
+      }
+    }
+  
+    return transformedOptions;
+  };
+  

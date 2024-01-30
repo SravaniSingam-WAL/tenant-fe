@@ -1,23 +1,24 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getBrandName, getToken } from "./utils";
-import { PORT } from "./config";
+import { API_URL } from "./config";
 
 const Home = () => {
   const navigate = useNavigate();
   const [tenantDetails,setTenantDetails] =useState([])
-  
+  const brandName = getBrandName()
   const handleLogin = ()=>{
     console.log('Login is Done')
     navigate("/tenant");
     
   }
-  const viewTenants = async ()=>{
+  useEffect(() => {
+    const fetchData = async () => {
     console.log('Clicked on View Tenant')
     const token=getToken()
     const result = await axios.get(
-      `${PORT}/api/tenants`,
+      `${API_URL}/api/tenants`,
       {
         headers: {
           Authorization: token
@@ -26,40 +27,60 @@ const Home = () => {
     );
     console.log(result.data.data)
     setTenantDetails(result.data.data)
-  }
+};
+
+fetchData();
+}, []);
+
   return (
     <div className="home-container">
-      <h2>Home Page</h2>
-      <h2>Click on Below links to open particular app</h2>
+      <h2>BrandName {brandName}</h2>
       <div>
       <span
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", fontSize:'17px' }}
         onClick={() => handleLogin()}
       >
         Create New Tenant
       </span>
       <br />
       <br />
-      <span
-        style={{ cursor: "pointer" }}
-        onClick={() => viewTenants()}
-      >
-        View Tenant Details
-      </span>
       </div>
       <div>
-     {!!tenantDetails.length && 
-      <>
-      <h2>Tenant List</h2><ul>
-          {tenantDetails.map((tenant, index) => (
-            <li key={index}>
-              <strong>Email:</strong> {tenant.userName}
-            </li>
-          ))}
-        </ul>
+      {!!tenantDetails.length && (
+        <>
+          <h4>Tenants List</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>BrandName</th>
+                <th>Applications</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tenantDetails.map((tenant, index) => (
+                <tr key={index}>
+                  <td>{tenant.userName}</td>
+                  <td>{tenant.brandName}</td>
+                  {tenant.permissions
+                    .filter((permission) => permission.isAccess)
+                    .map((permission, index) => (
+                      <span key={index}>
+                        {permission.application.name}
+                        {index < tenant.permissions.length - 1 && ', '}
+                      </span>
+                    ))}
+                  <td>
+                    <button onClick={() => navigate(`/tenant`, { state: { id: tenant.id } })}> Edit</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </>
-        }
-      </div>
+      )}
+        </div>
     </div>
   );
 };
