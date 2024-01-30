@@ -61,18 +61,21 @@ fetchData();
             <tbody>
               {tenantDetails.map((tenant, index) => (
                 <tr key={index}>
-                  <td>{tenant.userName}</td>
-                  <td>{tenant.brandName}</td>
+                  <td >{tenant.userName}</td>
+                  <td >{tenant.brandName}</td>
+                  <td>
                   {tenant.permissions
                     .filter((permission) => permission.isAccess)
                     .map((permission, index) => (
-                      <span key={index}>
+                      <span key={index} style={{ color: 'black', textDecoration: 'none' }} >
                         {permission.application.name}
                         {index < tenant.permissions.length - 1 && ', '}
                       </span>
                     ))}
+                    </td>
                   <td>
-                    <button onClick={() => navigate(`/tenant`, { state: { id: tenant.id } })}> Edit</button>
+                    <button onClick={() => navigate(`/tenant`, { state: { id: tenant.id } })}>  <i className="fas fa-pencil-alt" style={{ color: 'white' }}></i> 
+                    </button>
                   </td>
                 </tr>
               ))}

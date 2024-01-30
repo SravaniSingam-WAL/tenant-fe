@@ -56,7 +56,7 @@ const View = () => {
 
   return (
     <div className="home-container">
-      <h2>BrandName : {brandName}</h2>
+      <h2>BrandName :{brandName}</h2>
       <div>
         <br />
         <br />
