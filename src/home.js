@@ -34,14 +34,14 @@ fetchData();
 
   return (
     <div className="home-container">
-      <h2>BrandName {brandName}</h2>
       <div>
-      <span
-        style={{ cursor: "pointer", fontSize:'17px' }}
+      <p className="description">If you want to create new user then click on below button</p>
+      <button
+      className="createButton"
         onClick={() => handleLogin()}
       >
         Create New Tenant
-      </span>
+      </button>
       <br />
       <br />
       </div>
