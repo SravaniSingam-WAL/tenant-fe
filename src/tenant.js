@@ -3,10 +3,12 @@ import axios from "axios";
 import { useNavigate, useParams,useLocation } from "react-router-dom";
 import { getRoleId, getToken ,transformOptionsArrayToObject } from "./utils";
 import { API_URL } from "./config";
+import './login.scss'
+
 const Tenant = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { id } = location.state;
+  const { id } = !!location.state && location.state;
   const isEditMode = Boolean(id);
 console.log(isEditMode)
   const [brandName, setBrandName] = useState("");
@@ -82,41 +84,48 @@ console.log(isEditMode)
   };
 
   return (
+    <section>
     <div className="tenant-container">
-      <h2>{isEditMode ? "Edit" : "Create"} Tenant</h2>
+      <div className="tenantHeading">{isEditMode ? "Edit" : "Create"} Tenant</div>
       <form className="tenant-form" onSubmit={handleClick}>
+      <div className="form-group">
         <label>
-          Email:
+          Email Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
           <input
             type="text"
             value={email}
+            placeholder="Enter Email Id"
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <br />
+        </div>
         {!isEditMode && ( 
-          <>
-            <label>
-              Password:
+          <div className="form-group">
+          <label>
+              Password &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;:
               <input
                 type="password"
+                placeholder="****"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
             <br />
-          </>
+          </div>
         )}
+        <div className="form-group">
         <label>
-        Brand Name:
+        Brand Name &nbsp;&nbsp;:
         <input
           type="text"
           value={brandName}
+          placeholder="Enter Brand Name"
           onChange={(e) => setBrandName(e.target.value)}
         />
       </label>
-      <br></br>
-      <br />
+      </div>
+      <div className="checkboxes-group">
+      <div className="checkbox">
       <label>
         OP:
         <input
@@ -125,7 +134,8 @@ console.log(isEditMode)
           onChange={() => handleCheckboxChange("OP")}
         />
       </label>
-      <br />
+      </div>
+     <div className="checkbox">
       <label>
         FAA:
         <input
@@ -134,7 +144,8 @@ console.log(isEditMode)
           onChange={() => handleCheckboxChange("FAA")}
         />
       </label>
-      <br />
+      </div>
+      <div className="checkbox">
       <label>
         RDMS:
         <input
@@ -143,7 +154,8 @@ console.log(isEditMode)
           onChange={() => handleCheckboxChange("RDMS")}
         />
       </label>
-      <br />
+      </div>
+      <div className="checkbox">
       <label>
         CLAS:
         <input
@@ -152,10 +164,14 @@ console.log(isEditMode)
           onChange={() => handleCheckboxChange("CLAS")}
         />
       </label>
-      <br></br>
+      </div>
+      </div>
+      <div className="buttonStyle">
         <button type="submit">{isEditMode ? "Update" : "Create"}</button>
+        </div>
       </form>
     </div>
+    </section>
   );
 };
 

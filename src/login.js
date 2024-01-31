@@ -4,6 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { setToken } from "./utils";
 import { API_URL } from "./config";
+import './login.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -30,15 +32,14 @@ const Login = () => {
     );
     if (result) {
       console.log("Result", result);
-      console.log("-=======", result.data.user.roleId);
+      console.log("-=======", result.data.user);
       setToken(result.data.user);
       if(result.data.user.roleId === 1){
-      navigate("/home");
-    }
-    else{
-      navigate("/view");
-    }
-     }
+        navigate("/home");
+      }
+      else{
+        navigate("/view");
+      }  }
   }  catch(error){
     if(error.response && error.response.status === 401){
       console.log('Invalid email or password')
@@ -52,31 +53,43 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h2 className="loginText">Login Page</h2>
+    <section className="login">
+    <div className="content">
+    <div className="heading">
+    <p>Tenant Management Login</p>
+    </div>
       <form onSubmit={handleLogin}>
-        <label>
+      <div className={`form-group, position-relative`}>
+        <label >
           Username:
           <input
             type="text"
             value={username}
+            className={'form-control'}
+            placeholder="Enter Email"
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
-        <br />
+        </div>
+        <div className={`form-group, position-relative`}>
         <label>
           Password:
           <input
             type="password"
             value={password}
+            className={'form-control'}
+            placeholder="************"
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <br />
-        <button type="submit">Login</button>
+        </div>
+        <button type="submit"
+        className={`btn-theme, button`}
+        >Login</button>
       </form>
       {error && <p className="error-message">{error}</p>}
     </div>
+    </section>
   );
 };
 
