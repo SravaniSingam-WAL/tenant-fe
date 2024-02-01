@@ -145,3 +145,8 @@ padding: 10px 20px;
 .logout:hover{
   background-color: #3fd64c;
 }
+.welcomeText{
+  color: green;
+  font-size: 26px;
+  font-weight: 400;
+}

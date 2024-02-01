@@ -1,13 +1,14 @@
 import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { getBrandName, getToken } from "./utils";
+import { getBrandName, getName, getToken } from "./utils";
 import { API_URL } from "./config";
 
 const Home = () => {
   const navigate = useNavigate();
   const [tenantDetails,setTenantDetails] =useState([])
   const brandName = getBrandName()
+  const name =getName()
   const handleLogin = ()=>{
     console.log('Login is Done')
     navigate("/tenant");
@@ -34,6 +35,7 @@ fetchData();
 
   return (
     <div className="home-container">
+    <h4 className="welcomeText">Welcome {name}! welcome to the tenant management app.</h4>
       <div>
       <p className="description">If you want to create new user then click on below button</p>
       <button
@@ -48,7 +50,7 @@ fetchData();
       <div>
       {!!tenantDetails.length && (
         <>
-          <h4>Tenants List</h4>
+          <h4 className="brandName">Tenants List</h4>
           <table>
             <thead>
               <tr>
