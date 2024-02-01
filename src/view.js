@@ -3,31 +3,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getBrandName, getToken, transformOptionsArrayToObject } from "./utils";
 import { API_URL } from "./config";
-import { getTenantId } from "./utils";
+import { getTenantId,getName } from "./utils";
 
 const View = () => {
   const navigate = useNavigate();
-  const [tenantDetails, setTenantDetails] = useState([]);
   const [email, setEmail] = useState("");
   const [brandName, setBrandName] = useState("");
   const [options, setOptions] = useState([]);
-
-  const handleLogin = () => {
-    console.log("Login is Done");
-    navigate("/tenant");
-  };
-  const viewTenants = async () => {
-    console.log("Clicked on View Tenant");
-    const token = getToken();
-    const tenantId = getTenantId();
-    const result = await axios.get(`${API_URL}/api/tenant/${tenantId}`, {
-      headers: {
-        Authorization: token,
-      },
-    });
-    console.log(result.data.data);
-    setTenantDetails(result.data.data);
-  };
+  const name= getName()
   const tenantId = getTenantId();
 
   useEffect(() => {
@@ -56,9 +39,8 @@ const View = () => {
 
   return (
     <div className="home-container">
-      <h2>BrandName :{brandName}</h2>
+      <h4>Welcome {name}! welcome to the tenant management app.</h4>
       <div>
-        <br />
         <br />
       </div>
       <div>
@@ -68,7 +50,7 @@ const View = () => {
           <strong>BrandName:</strong> {brandName}
         </p>
         <p>
-          <h4>Applications he has permissions</h4>
+          <h5>Applications Available to you</h5>
           <div >
             {options.map(
               (app, index) =>

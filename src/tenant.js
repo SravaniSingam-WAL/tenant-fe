@@ -13,6 +13,7 @@ const Tenant = () => {
 console.log(isEditMode)
   const [brandName, setBrandName] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [options, setOptions] = useState({
     OP: false,
@@ -32,13 +33,14 @@ console.log(isEditMode)
         console.log('result data',result.data)
         console.log('result data =====',result.data.data)
         if (result) {
-          const { userName, brandName, permissions } = result.data.data;
+          const { userName,name, brandName, permissions } = result.data.data;
           console.log(email,'email')
           console.log(brandName,'brandName')
           console.log(permissions,'Permissions')
           const transformedOptions = transformOptionsArrayToObject(permissions);
           console.log('object',transformedOptions)
           setEmail(userName);
+          setName(name)
           setBrandName(brandName);
           setOptions(transformedOptions);
         }
@@ -57,8 +59,8 @@ console.log(isEditMode)
       : `${API_URL}/api/tenant`;
 
     const data = isEditMode
-      ? { email, brandName, options }
-      : { email, brandName, password, options };
+      ? { email,name, brandName, options }
+      : { email,name, brandName, password, options };
 
     const result = isEditMode
       ? await axios.put(endpoint, data, { headers: { Authorization: token } })
@@ -88,6 +90,18 @@ console.log(isEditMode)
     <div className="tenant-container">
       <div className="tenantHeading">{isEditMode ? "Edit" : "Create"} Tenant</div>
       <form className="tenant-form" onSubmit={handleClick}>
+      <div className="form-group">
+        <label>
+          Name  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :
+          <input
+            type="text"
+            value={name}
+            placeholder="Enter Name"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        </div>
+      
       <div className="form-group">
         <label>
           Email Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :

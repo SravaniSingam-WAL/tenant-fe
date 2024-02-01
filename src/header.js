@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getBrandName,getToken,setToken } from './utils';
 
 const Header =() => {
@@ -13,7 +13,7 @@ const Header =() => {
     }
   return (
    <div className='navBar'>
-    <div className='brand'>{brandName}Hello</div>
+    <div className='brand'>{brandName}</div>
     <button className='logout' onClick={()=>logout()}>Logout</button>
     </div>
   );

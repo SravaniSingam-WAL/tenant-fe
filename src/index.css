@@ -95,6 +95,7 @@ li {
  }
  .description{
   font-size: 19px;
+  margin-top: 20px;
  }
  table {
   width: 90%;
@@ -114,6 +115,12 @@ table th {
 tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
+.linkOption{
+  font-size: 1.3rem;
+  text-decoration:none;
+  color: green;
+
+}
 .navBar{
 display: flex;
 justify-content: space-between;
@@ -123,7 +130,7 @@ color:  #4fb33d;
 padding: 10px 20px;
 }
 .brand{
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color:  #4fb33d;
 }
 .logout{
